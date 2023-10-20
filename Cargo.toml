@@ -1,0 +1,24 @@
+[package]
+name = "csv2qr"
+description = "A simple command line tool for generating QR codes from a CSV file."
+license = "MIT OR Apache-2.0"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "3.2", features = ["derive", "wrap_help"] }
+csv = "1"
+env_logger = "0.10"
+log = "0.4"
+genpdf = { version = "0.2", features = ["images"] }
+qrcode-generator = "4"
+thiserror = "1"
+urlencoding = "2"
+
+[dev-dependencies]
+bardecoder = "0.5"
+image = "0.24"
+project-root = "0.2"
+tempdir = "0.3"
