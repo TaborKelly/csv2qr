@@ -126,11 +126,15 @@ mod tests {
         example_path.push("example/example.csv");
 
         let records = parse_records(&example_path)?;
-        assert_eq!(2, records.len());
-        assert_eq!(records[0].title, "Prodigy - Mind Fields");
-        assert_eq!(records[0].value, "https://youtu.be/7mKieArPRkw");
-        assert_eq!(records[1].title, "This is what I do");
-        assert_eq!(records[1].value, "https://youtu.be/YPL41OkVABk");
+        assert_eq!(4, records.len());
+        assert_eq!(records[0].title, "Hack the planet");
+        assert_eq!(records[0].value, "https://youtu.be/u3CKgkyc7Qo");
+        assert_eq!(records[1].title, "Prodigy - Mind Fields");
+        assert_eq!(records[1].value, "https://youtu.be/7mKieArPRkw");
+        assert_eq!(records[2].title, "I am not a martyr I'm a problem");
+        assert_eq!(records[2].value, "https://youtu.be/7Azv0G85lh8?si=awP06dwWDUcuOBaD&t=46");
+        assert_eq!(records[3].title, "This is what I do");
+        assert_eq!(records[3].value, "https://youtu.be/YPL41OkVABk");
 
         Ok(())
     }
