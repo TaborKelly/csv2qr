@@ -6,7 +6,7 @@ My friend told me that they needed to generate some QR codes. Naturally I wrote 
 
 ## Prerequisites
 
-Install cargo with [rustup](https://rustup.rs/). Then just install `csv2qr` with `cargo add csv2qr`. `rustup` should have setup your `PATH` correctly but on Windows you might have to reboot or something. IDK, I don't use Windows.
+Install cargo with [rustup](https://rustup.rs/). Then just install `csv2qr` with `cargo install csv2qr`. `rustup` should have setup your `PATH` correctly but on Windows you might have to reboot or something. IDK, I don't use Windows.
 
 ## Usage
 
@@ -50,6 +50,6 @@ total 7856
 
 ## Special thanks
 
-This is just some simple glue code that stitched other Rust crates together. The real magic happens in the [genpdf](https://crates.io/crates/genpdf) and [qrcode-generator](https://crates.io/crates/qrcode-generator) crates. Tests were made possible by the [bardecoder](https://crates.io/crates/bardecoder) and [image](https://crates.io/crates/image) crate. I also included the [Calling Code font](https://github.com/RookAndPawn/text-to-png/blob/main/text-to-png/src/resources/CallingCode-Regular.ttf) from the source code of the [text-to-png](https://crates.io/crates/text-to-png) crate.
+This is just some simple glue code that stitched other Rust crates together. The real magic happens in the [genpdf](https://crates.io/crates/genpdf) and [qrcode-generator](https://crates.io/crates/qrcode-generator) crates. Tests were made possible by the [bardecoder](https://crates.io/crates/bardecoder) and [image](https://crates.io/crates/image) crates. I also included the [Calling Code font](https://github.com/RookAndPawn/text-to-png/blob/main/text-to-png/src/resources/CallingCode-Regular.ttf) from the source code of the [text-to-png](https://crates.io/crates/text-to-png) crate.
 
 To the best of my knowledge it's all pure Rust. I have tested with Rust 1.66.1 on Kubuntu 22.04 and Rust 1.73.0 on Windows 10. It will _probably_ run on other platforms too.
