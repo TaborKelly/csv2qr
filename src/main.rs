@@ -1,7 +1,7 @@
-use log::debug;
+use log::{debug, error};
 
 use clap::Parser;
-use csv2qr::{parse_records, generate_qrs, generate_pdf , Result};
+use csv2qr::{generate_pdf, generate_qrs, parse_records, CsvToQrError, Result};
 use std::path;
 
 const ABOUT: &str = "
@@ -13,6 +13,19 @@ struct Args {
     /// Turn on debug output
     #[clap(short, long)]
     debug: bool,
+
+    /// ECC level (low, medium, quartile, or high)
+    #[clap(long, default_value = "medium")]
+    ecc: String,
+
+    /// Do not delete the intermediate PNG of the QR code
+    #[clap(short, long)]
+    save_intermediate: bool,
+
+    /// Do not generate the final PDF document, only the intermediate PNG.
+    /// This will enable save-intermediate automatically.
+    #[clap(short, long)]
+    no_pdf: bool,
 
     /// CSV file to parse
     #[clap(index = 1)]
@@ -32,9 +45,22 @@ fn main() -> Result<()> {
     }
     debug!("args: {:?}", args);
 
-    let records = parse_records(&args.csv_path)?;
-    generate_qrs(&records, &args.output_path)?;
-    generate_pdf(&records, &args.output_path)?;
+    let ecc_level = match args.ecc.as_str() {
+        "low" => qrcode_generator::QrCodeEcc::Low,
+        "medium" => qrcode_generator::QrCodeEcc::Medium,
+        "high" => qrcode_generator::QrCodeEcc::High,
+        "quartile" => qrcode_generator::QrCodeEcc::Quartile,
+        _ => {
+            error!("unrecognized ecc level: {}", args.ecc);
+            return Err(Box::new(CsvToQrError::ParseError));
+        }
+    };
+
+    let records = parse_records(&args.csv_path, &args.output_path)?;
+    generate_qrs(&records, ecc_level)?;
+    if !args.no_pdf {
+        generate_pdf(&records, args.save_intermediate)?;
+    }
 
     Ok(())
 }
